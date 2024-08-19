@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { View } from '@tarojs/components'
-import { Button, ConfigProvider, TextArea, Dialog } from '@nutui/nutui-react-taro'
+import {Button, ConfigProvider, TextArea, Dialog, Cell} from '@nutui/nutui-react-taro'
 import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
 import './index.scss'
@@ -27,21 +27,23 @@ function Index() {
     <ConfigProvider locale={locale}>
       <View className='nutui-react-demo'>
         <View>{translated[localeKey].welcome}</View>
-        <View>
-          <Button type='primary' onClick={handleSwitchLocale}>
-            {translated[localeKey].button}
-          </Button>
-          <Button type='success' onClick={() => setVisible(true)}>
-            {translated[localeKey].open}
-          </Button>
-          <Dialog
-            visible={visible}
-            onConfirm={() => setVisible(false)}
-            onCancel={() => setVisible(false)}>
-            {translated[localeKey].welcome}
-          </Dialog>
-          <TextArea disabled showCount maxLength={20} />
-        </View>
+        <Cell title={
+          <View>
+            <Button type='primary' onClick={handleSwitchLocale}>
+              {translated[localeKey].button}
+            </Button>
+            <Button type='success' onClick={() => setVisible(true)}>
+              {translated[localeKey].open}
+            </Button>
+            <Dialog
+              visible={visible}
+              onConfirm={() => setVisible(false)}
+              onCancel={() => setVisible(false)}>
+              {translated[localeKey].welcome}
+            </Dialog>
+            <TextArea disabled showCount maxLength={20} />
+          </View>
+        }/>
       </View>
     </ConfigProvider>
   )

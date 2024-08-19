@@ -4,7 +4,7 @@ export default defineAppConfig({
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
+    navigationBarBackgroundColor: '#339AF0',
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black'
   }
