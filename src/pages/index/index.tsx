@@ -26,7 +26,7 @@ function Index() {
   return (
     <ConfigProvider locale={locale}>
       <View className='nutui-react-demo'>
-        <View>{translated[localeKey].welcome}</View>
+        {/*<View>{translated[localeKey].welcome}</View>*/}
         <Cell title={
           <View>
             <Button type='primary' onClick={handleSwitchLocale}>
