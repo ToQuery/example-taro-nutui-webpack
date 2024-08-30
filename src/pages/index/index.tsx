@@ -48,6 +48,7 @@ function Index() {
         }/>
         <View>下面应该显示dangerouslySetInnerHTML的内容</View>
         <View dangerouslySetInnerHTML={{ __html: html }}></View>
+        <View>上面应该显示dangerouslySetInnerHTML的内容</View>
       </View>
     </ConfigProvider>
   )
