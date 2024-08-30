@@ -5,6 +5,8 @@ import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
 import './index.scss'
 function Index() {
+  const html = `<h1 style="color: red">Wallace is way taller than other reporters.</h1>`
+
   const [locale, setLocale] = useState(zhCN)
   const localeKey = locale === zhCN ? 'zhCN' : 'enUS'
   const [visible, setVisible] = useState(false)
@@ -44,6 +46,8 @@ function Index() {
             <TextArea disabled showCount maxLength={20} />
           </View>
         }/>
+        <View>下面应该显示dangerouslySetInnerHTML的内容</View>
+        <View dangerouslySetInnerHTML={{ __html: html }}></View>
       </View>
     </ConfigProvider>
   )
