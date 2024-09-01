@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { View } from '@tarojs/components'
-import {Button, ConfigProvider, TextArea, Dialog, Cell} from '@nutui/nutui-react-taro'
+import {Button, Image, ConfigProvider, TextArea, Dialog, Cell} from '@nutui/nutui-react-taro'
 import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
 import './index.scss'
@@ -49,6 +49,8 @@ function Index() {
         <View>下面应该显示dangerouslySetInnerHTML的内容</View>
         <View dangerouslySetInnerHTML={{ __html: html }}></View>
         <View>上面应该显示dangerouslySetInnerHTML的内容</View>
+
+        <Image src="https://storage.360buyimg.com/imgtools/e067cd5b69-07c864c0-dd02-11ed-8b2c-d7f58b17086a.png" height={200} />
       </View>
     </ConfigProvider>
   )
