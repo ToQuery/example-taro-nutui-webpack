@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { View } from '@tarojs/components'
-import {Button, Image, ConfigProvider, TextArea, Dialog, Cell} from '@nutui/nutui-react-taro'
+import {Button, Image, ConfigProvider, TextArea, Dialog, Cell, Grid} from '@nutui/nutui-react-taro'
 import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
 import './index.scss'
@@ -51,6 +51,28 @@ function Index() {
         <View>上面应该显示dangerouslySetInnerHTML的内容</View>
 
         <Image src="https://storage.360buyimg.com/imgtools/e067cd5b69-07c864c0-dd02-11ed-8b2c-d7f58b17086a.png" height={200} />
+
+
+        <Grid columns={2} gap={50} square style={{ paddingLeft: "0!important" }}>
+          <Grid.Item text='文字'>
+            1
+          </Grid.Item>
+          <Grid.Item text='文字'>
+            2
+          </Grid.Item>
+          <Grid.Item text='文字'>
+            3
+          </Grid.Item>
+          <Grid.Item text='文字'>
+            4
+          </Grid.Item>
+          <Grid.Item text='文字'>
+            5
+          </Grid.Item>
+          <Grid.Item text='文字'>
+            6
+          </Grid.Item>
+        </Grid>
       </View>
     </ConfigProvider>
   )

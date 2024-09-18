@@ -1,5 +1,5 @@
-import {Image, View} from '@tarojs/components'
-import {ConfigProvider} from '@nutui/nutui-react-taro'
+import {View} from '@tarojs/components'
+import {Image, ConfigProvider} from '@nutui/nutui-react-taro'
 import './index.scss'
 
 function Index() {
