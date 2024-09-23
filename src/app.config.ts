@@ -1,5 +1,6 @@
 export default defineAppConfig({
   pages: [
+    'pages/infinite_loading/index',
     'pages/index/index',
     'pages/about/index'
   ],
@@ -12,6 +13,10 @@ export default defineAppConfig({
       {
         pagePath: 'pages/index/index',
         text: '首页'
+      },
+      {
+        pagePath: 'pages/infinite_loading/index',
+        text: '滚动'
       },
       {
         pagePath: 'pages/about/index',
