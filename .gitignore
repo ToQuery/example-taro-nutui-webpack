@@ -6,3 +6,8 @@ node_modules/
 .DS_Store
 .swc
 .idea/
+
+# local env files
+.env
+.env*.local
+
