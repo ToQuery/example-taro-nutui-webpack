@@ -1,8 +1,6 @@
-
 import {useState} from "react";
 import Taro, {useDidHide, useDidShow, useLoad, useReady, useUnload} from "@tarojs/taro";
 import {Elevator} from "@nutui/nutui-react-taro";
-import {Fabulous} from "@nutui/icons-react-taro";
 
 import './index.scss'
 
@@ -26,13 +24,13 @@ const Index = () => {
     const dataList: DataType = []
 
     // 字母顺序生成数据
-    const letters = ['A', 'B', 'E', 'G', 'H'];
+    const letters = ['A', 'B', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
     for (let i = 0; i < letters.length; i++) {
       const letter = letters[i];
 
       const itemList: DataListType = []
-      for (let j = 0; j < 10; j++) {
+      for (let j = 0; j < 50; j++) {
         itemList.push({
           name: letter + '-' + j,
           id: j,
@@ -86,7 +84,6 @@ const Index = () => {
         {(value) => {
           return (
             <>
-              <Fabulous size={12} />
               <span style={{marginLeft: '15px'}}>{value?.name}</span>
             </>
           )

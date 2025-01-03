@@ -72,14 +72,6 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
             generateScopedName: '[name]__[local]___[hash:base64:5]'
           }
         },
-        htmltransform: {
-          enable: true,
-          // 设置成 false 表示 不去除 * 相关的选择器区块
-          // 假如开启这个配置，它会把 tailwindcss 整个 css var 的区域块直接去除掉
-          config: {
-            removeCursorStyle: false,
-          },
-        },
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
@@ -88,7 +80,8 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
             install: {
               plugin: UnifiedWebpackPluginV5,
               args: [{
-                appType: 'taro'
+                appType: 'taro',
+                injectAdditionalCssVarScope: true
               }]
             }
           }

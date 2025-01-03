@@ -3,7 +3,8 @@
   "projectname": "example-taro-nutui-webpack",
   "setting": {
     "compileHotReLoad": false,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": true,
+    "urlCheck": false
   },
   "libVersion": "3.7.3"
 }
