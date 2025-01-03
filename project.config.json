@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "dist/",
-  "projectname": "taro-nutui-bug",
+  "projectname": "example-taro-nutui-webpack",
   "description": "",
   "appid": "wxf792a52cf357e752",
   "setting": {

@@ -10,7 +10,7 @@ import prodConfig from './prod'
 // @ts-ignore
 export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport<'webpack5'> = {
-    projectName: 'taro-nutui-bug',
+    projectName: 'example-taro-nutui-webpack',
     date: '2024-8-19',
     designWidth: 375,
     deviceRatio: {
