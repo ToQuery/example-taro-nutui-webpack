@@ -1,11 +1,15 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+// import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import vitePluginImp from 'vite-plugin-imp'
+import path from 'path';
+
 import devConfig from './dev'
 import prodConfig from './prod'
-import vitePluginImp from 'vite-plugin-imp'
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
-  const baseConfig: UserConfigExport<'webpack5'> = {
+
+// @ts-ignore
+export default defineConfig<'vite'>(async (merge, { command, mode }) => {
+  const baseConfig: UserConfigExport<'vite'> = {
     projectName: 'taro-nutui-bug',
     date: '2024-8-19',
     designWidth: 375,
@@ -28,17 +32,43 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
     },
     framework: 'react',
     compiler: {
-
-      type: 'webpack5',
-      prebundle: {
-        enable: false
-      }
+      vitePlugins: [vitePluginImp({
+        libList: [
+          {
+            libName: '@nutui/nutui-react-taro',
+            style: (name) => {
+              return `@nutui/nutui-react-taro/dist/esm/${name}/style/css`
+            },
+            replaceOldImport: false,
+            camel2DashComponentName: false,
+          }
+        ]
+      })],
+      type: 'vite'
     },
+    alias: {
+      '@': path.resolve(__dirname, '..', 'src'),
+    },
+    // sass: {
+    //   resource: [
+    //     path.resolve(__dirname, '..', 'src/styles/custom-theme.scss')
+    //   ]
+    // },
     cache: {
       enable: false // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
     },
     mini: {
+      // imageUrlLoaderOption: {
+      //   limit: 10240
+      // },
       postcss: {
+        // 小程序端样式引用本地资源内联
+        // url: {
+        //   enable: true,
+        //   config: {
+        //     limit: 10240 // 设定转换尺寸上限
+        //   }
+        // },
         pxtransform: {
           enable: true,
           config: {
@@ -53,17 +83,11 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
           }
         }
       },
-      webpackChain(chain) {
-        chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
-      }
     },
     h5: {
       publicPath: '/',
       staticDirectory: 'static',
-      output: {
-        filename: 'js/[name].[hash:8].js',
-        chunkFilename: 'js/[name].[chunkhash:8].js'
-      },
+
       miniCssExtractPluginOption: {
         ignoreOrder: true,
         filename: 'css/[name].[hash].css',
@@ -82,9 +106,6 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
           }
         }
       },
-      webpackChain(chain) {
-        chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
-      }
     },
     rn: {
       appName: 'taroDemo',
@@ -93,7 +114,7 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         }
       }
-    }
+    },
   }
   if (process.env.NODE_ENV === 'development') {
     // 本地开发构建配置（不混淆压缩）

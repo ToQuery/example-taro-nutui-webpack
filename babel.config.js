@@ -6,7 +6,7 @@ module.exports = {
       {
         framework: 'react',
         ts: 'true',
-        compiler: 'webpack5',
+        compiler: 'vite',
       }]
   ],
   plugins: [
@@ -19,6 +19,6 @@ module.exports = {
         "camel2DashComponentName": false
       },
       'nutui-react-taro'
-    ]
+    ],
   ]
 }

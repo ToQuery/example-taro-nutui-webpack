@@ -50,10 +50,10 @@ const Demo1 = () => {
   const renderJoyImg = (() => {
     return (
       <img
-        alt=""
+        alt=''
         style={{ height: '24px', width: '24px' }}
-        src="https://img10.360buyimg.com/imagetools/jfs/t1/157510/3/39873/353/65fa8bfeF2627cb86/bd9e734d9fda59f2.png"
-        className="nut-infinite-bottom-tips-icons"
+        src='https://img10.360buyimg.com/imagetools/jfs/t1/157510/3/39873/353/65fa8bfeF2627cb86/bd9e734d9fda59f2.png'
+        className='nut-infinite-bottom-tips-icons'
       />
     )
   })()
@@ -61,9 +61,9 @@ const Demo1 = () => {
   return (
     <>
       <Cell>
-        <ul style={InfiniteUlStyle} id="scroll">
+        <ul style={InfiniteUlStyle} id='scroll'>
           <InfiniteLoading
-            target="scroll"
+            target='scroll'
             hasMore={hasMore}
             onLoadMore={loadMore}
             onScroll={() => {
