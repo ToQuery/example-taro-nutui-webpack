@@ -1,8 +1,12 @@
 export default defineAppConfig({
   pages: [
-    'pages/infinite_loading/index',
     'pages/index/index',
-    'pages/about/index'
+    'pages/list/index',
+    'pages/about/index',
+    'pages/grid_item/index',
+    'pages/infinite_loading/index',
+    'pages/inner_html/index',
+    'pages/tailwindcss/index',
   ],
   tabBar: {
     color: '#000000',
@@ -15,8 +19,8 @@ export default defineAppConfig({
         text: '首页'
       },
       {
-        pagePath: 'pages/infinite_loading/index',
-        text: '滚动'
+        pagePath: 'pages/list/index',
+        text: '功能列表'
       },
       {
         pagePath: 'pages/about/index',
