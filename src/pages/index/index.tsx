@@ -4,6 +4,7 @@ import {Button, Image, ConfigProvider, TextArea, Dialog, Cell, Grid} from '@nutu
 import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
 import './index.scss'
+
 function Index() {
   const html = `<h1 style="color: red">Wallace is way taller than other reporters.</h1>`
 
@@ -28,6 +29,8 @@ function Index() {
   return (
     <ConfigProvider locale={locale}>
       <View className='nutui-react-demo'>
+        <View className='text-[#acc855] text-[100px]'>Hello world!</View>
+
         {/*<View>{translated[localeKey].welcome}</View>*/}
         <Cell title={
           <View>
@@ -40,17 +43,19 @@ function Index() {
             <Dialog
               visible={visible}
               onConfirm={() => setVisible(false)}
-              onCancel={() => setVisible(false)}>
+              onCancel={() => setVisible(false)}
+            >
               {translated[localeKey].welcome}
             </Dialog>
             <TextArea disabled showCount maxLength={20} />
           </View>
-        }/>
+        }
+        />
         <View>下面应该显示dangerouslySetInnerHTML的内容</View>
         <View dangerouslySetInnerHTML={{ __html: html }}></View>
         <View>上面应该显示dangerouslySetInnerHTML的内容</View>
 
-        <Image src="https://storage.360buyimg.com/imgtools/e067cd5b69-07c864c0-dd02-11ed-8b2c-d7f58b17086a.png" height={200} />
+        <Image src='https://storage.360buyimg.com/imgtools/e067cd5b69-07c864c0-dd02-11ed-8b2c-d7f58b17086a.png' height={200} />
 
 
         <Grid columns={2} gap={50} square style={{ paddingLeft: "0!important" }}>

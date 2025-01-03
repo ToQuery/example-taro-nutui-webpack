@@ -1,15 +1,15 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
-// import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import vitePluginImp from 'vite-plugin-imp'
+import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
+import {UnifiedWebpackPluginV5} from 'weapp-tailwindcss';
 import path from 'path';
 
 import devConfig from './dev'
 import prodConfig from './prod'
-// https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 
+// https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 // @ts-ignore
-export default defineConfig<'vite'>(async (merge, { command, mode }) => {
-  const baseConfig: UserConfigExport<'vite'> = {
+export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
+  const baseConfig: UserConfigExport<'webpack5'> = {
     projectName: 'taro-nutui-bug',
     date: '2024-8-19',
     designWidth: 375,
@@ -32,19 +32,11 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
     },
     framework: 'react',
     compiler: {
-      vitePlugins: [vitePluginImp({
-        libList: [
-          {
-            libName: '@nutui/nutui-react-taro',
-            style: (name) => {
-              return `@nutui/nutui-react-taro/dist/esm/${name}/style/css`
-            },
-            replaceOldImport: false,
-            camel2DashComponentName: false,
-          }
-        ]
-      })],
-      type: 'vite'
+
+      type: 'webpack5',
+      prebundle: {
+        enable: false
+      }
     },
     alias: {
       '@': path.resolve(__dirname, '..', 'src'),
@@ -61,14 +53,12 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
       // imageUrlLoaderOption: {
       //   limit: 10240
       // },
+      miniCssExtractPluginOption: {
+        ignoreOrder: true,
+        // filename: 'css/[name].[fullhash].css',
+        // chunkFilename: 'css/[name].[chunkhash].css'
+      },
       postcss: {
-        // 小程序端样式引用本地资源内联
-        // url: {
-        //   enable: true,
-        //   config: {
-        //     limit: 10240 // 设定转换尺寸上限
-        //   }
-        // },
         pxtransform: {
           enable: true,
           config: {
@@ -81,13 +71,38 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
             namingPattern: 'module', // 转换模式，取值为 global/module
             generateScopedName: '[name]__[local]___[hash:base64:5]'
           }
-        }
+        },
+        htmltransform: {
+          enable: true,
+          // 设置成 false 表示 不去除 * 相关的选择器区块
+          // 假如开启这个配置，它会把 tailwindcss 整个 css var 的区域块直接去除掉
+          config: {
+            removeCursorStyle: false,
+          },
+        },
       },
+      webpackChain(chain) {
+        chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
+        chain.merge({
+          plugin: {
+            install: {
+              plugin: UnifiedWebpackPluginV5,
+              args: [{
+                appType: 'taro'
+              }]
+            }
+          }
+        })
+
+      }
     },
     h5: {
       publicPath: '/',
       staticDirectory: 'static',
-
+      output: {
+        filename: 'js/[name].[hash:8].js',
+        chunkFilename: 'js/[name].[chunkhash:8].js'
+      },
       miniCssExtractPluginOption: {
         ignoreOrder: true,
         filename: 'css/[name].[hash].css',
@@ -106,6 +121,9 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
           }
         }
       },
+      webpackChain(chain) {
+        chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
+      }
     },
     rn: {
       appName: 'taroDemo',
@@ -114,7 +132,7 @@ export default defineConfig<'vite'>(async (merge, { command, mode }) => {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         }
       }
-    },
+    }
   }
   if (process.env.NODE_ENV === 'development') {
     // 本地开发构建配置（不混淆压缩）
