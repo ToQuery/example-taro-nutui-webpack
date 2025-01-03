@@ -3,6 +3,9 @@ import {View} from '@tarojs/components'
 import {Button, Cell, ConfigProvider, Dialog, TextArea} from '@nutui/nutui-react-taro'
 import enUS from '@nutui/nutui-react-taro/dist/locales/en-US'
 import zhCN from '@nutui/nutui-react-taro/dist/locales/zh-CN'
+import Taro, {useLoad, useReady, useDidHide, useDidShow, useUnload} from "@tarojs/taro";
+
+
 import './index.scss'
 
 function Index() {
@@ -25,6 +28,33 @@ function Index() {
   const handleSwitchLocale = () => {
     setLocale(locale === zhCN ? enUS : zhCN)
   }
+
+  useLoad((callback) => {
+    console.log("IndexPage useLoad", callback);
+  });
+
+  useDidShow((callback) => {
+    console.log('IndexPage useDidShow', callback);
+  })
+
+  useReady(() => {
+    console.log('IndexPage useReady')
+
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['wechatFriends', 'wechatMoment', 'shareAppMessage', 'shareTimeline']
+    })
+  })
+
+
+  useDidHide(() => {
+    console.log('IndexPage useDidHide');
+  })
+
+  useUnload(() => {
+    console.log('IndexPage useUnload');
+  })
+
   return (
     <ConfigProvider locale={locale}>
       <View className='nutui-react-demo'>
